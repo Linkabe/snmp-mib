@@ -1,0 +1,6 @@
+Print Out of Your Information in: 2019-02-18 17:29:07
+
+HOST-RESOURCES-MIB::hrProcessorLoad.8 = INTEGER: 30
+HOST-RESOURCES-MIB::hrProcessorLoad.9 = INTEGER: 28
+HOST-RESOURCES-MIB::hrProcessorLoad.10 = INTEGER: 36
+HOST-RESOURCES-MIB::hrProcessorLoad.11 = INTEGER: 31
