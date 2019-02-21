@@ -12,6 +12,125 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 
+from datetime import datetime
+from random import *
+import time
+i=0
+
+
+def save_to_graph():
+        for i in range (1,10):
+            rad = randint(20, 30)
+            rad = str(rad)
+            i = str(i + 1)
+            f = open("./Graphs.txt", "a+")
+            f.write(i + "," + rad + "\n")
+            print(i)
+            print(rad)
+            f.close()
+
+
+def read_last_lines():
+    read_last_line()
+    read_last_line1()
+    read_last_line2()
+    read_last_line4()
+    read_last_line5()
+
+
+def read_last_line():
+    filename = './Graphs.txt'
+    file = open(filename, 'r')
+    line2 = file.readlines()[-2]
+    print(line2)
+    f = open("./TempUp.txt", "w")
+    f.write(line2)
+    file.close()
+    f.close()
+
+
+
+def read_last_line1():
+    filename = './Graphs.txt'
+    file = open(filename, 'r')
+    line1 = file.readlines()[-1]
+    print(line1)
+    f = open("./TempUp.txt", "a")
+    f.write(line1)
+    file.close()
+    f.close()
+
+def read_last_line2():
+    filename = './Graphs.txt'
+    file = open(filename, 'r')
+    line3 = file.readlines()[-3]
+    print(line3)
+    f = open("./TempUp.txt", "a")
+    f.write(line3)
+    file.close()
+    f.close()
+
+def read_last_line4():
+    filename = './Graphs.txt'
+    file = open(filename, 'r')
+    line4 = file.readlines()[-4]
+    print(line4)
+    f = open("./TempUp.txt", "a")
+    f.write(line4)
+    file.close()
+    f.close()
+
+def read_last_line5():
+    filename = './Graphs.txt'
+    file = open(filename, 'r')
+    line5 = file.readlines()[-5]
+    print(line5)
+    f = open("./TempUp.txt", "a")
+    f.write(line5)
+    file.close()
+    f.close()
+
+def cleanfile():
+    f = open("./TempUp.txt", "w+")
+    f.write("")
+    f.close()
+
+
+def animate1():
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 1, 1)
+    pullData = open("./Graphs.txt", "r").read()
+    dataArray = pullData.split('\n')
+    xar = []
+    yar = []
+    for eachLine in dataArray:
+        if len(eachLine) > 1:
+            x, y = eachLine.split(',')
+            xar.append(int(x))
+            yar.append(int(y))
+    ax1.clear()
+    ax1.plot(xar, yar)
+    animation.FuncAnimation(fig, animate, interval=1000)
+    plt.show()
+
+def animate():
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1, 1, 1)
+    pullData = open("./TempUp.txt", "r").read()
+    dataArray = pullData.split('\n')
+    xar = []
+    yar = []
+    for eachLine in dataArray:
+        if len(eachLine) > 1:
+            x, y = eachLine.split(',')
+            xar.append(int(x))
+            yar.append(int(y))
+    ax1.clear()
+    ax1.plot(xar, yar)
+    animation.FuncAnimation(fig, animate, interval=1000)
+    plt.show()
+
+
 
 
 
@@ -216,7 +335,7 @@ txt6 = scrolledtext.ScrolledText(f6, width=85, height=10)
 txt6.place(x=60, y=80)
 Button(f6, text='SNMP System Requests', font=("Arial Bold", 10), command=lambda:raise_frame(f6)).place(x=10, y=2)
 Button(f6, text='SNPM MIB Browser', font=("Arial", 10), command=lambda:raise_frame(f7)).place(x=175, y=2)
-Button(f6, text='SNMP Graphs.txt', font=("Arial", 10), command=lambda:raise_frame(f8)).place(x=308, y=2)
+Button(f6, text='SNMP Graphs', font=("Arial", 10), command=lambda:raise_frame(f8)).place(x=308, y=2)
 Label(f6, text="SNMP System Requests", font=("Arial Bold", 25)).place(relx=0.5, rely=0.13, anchor=CENTER)
 btnPrint = Button(f6, text="Print", font=("Arial", 14), bg="Blue", fg="black", command=printdiag)
 btnPrint.place(x=100, y=57, anchor=CENTER)
@@ -254,7 +373,7 @@ btnPrint = Button(f7, text="Print", font=("Arial", 14), bg="Blue", fg="black", c
 btnPrint.place(x=100, y=57, anchor=CENTER)
 Button(f7, text='SNMP System Requests', font=("Arial", 10), command=lambda:raise_frame(f6)).place(x=10, y=2)
 Button(f7, text='SNMP MIB Browser', font=("Arial Bold", 10), command=lambda:raise_frame(f7)).place(x=170, y=2)
-Button(f7, text='SNMP Graphs.txt', font=("Arial", 10), command=lambda:raise_frame(f8)).place(x=308, y=2)
+Button(f7, text='SNMP Graphs', font=("Arial", 10), command=lambda:raise_frame(f8)).place(x=308, y=2)
 Label(f7, text="SNMP MIB Browser", font=("Arial Bold", 25)).place(relx=0.5, rely=0.13, anchor=CENTER)
 btnGet = Button(f7, text="SNMP  Get", font=("Arial", 12), bg="Green", fg="black", command=snmpget)
 btnGet.place(x=390, y=320, anchor=CENTER)
@@ -291,38 +410,24 @@ e5OID.place(x=320, y=275)
 
 
 Button(f8, text='SNMP System Requests', font=("Arial", 10), command=lambda:raise_frame(f6)).place(x=10, y=2)
-Button(f8, text='SNMP Graphs.txt', font=("Arial Bold", 10), command=lambda:raise_frame(f8)).place(x=308, y=2)
+Button(f8, text='SNMP Graphs', font=("Arial Bold", 10), command=lambda:raise_frame(f8)).place(x=308, y=2)
 Button(f8, text='SNPM MIB Browser', font=("Arial", 10), command=lambda:raise_frame(f7)).place(x=175, y=2)
-Label(f8, text="SNMP Graphs.txt", font=("Arial Bold", 25)).place(relx=0.5, rely=0.13, anchor=CENTER)
+Label(f8, text="SNMP Graphs", font=("Arial Bold", 25)).place(relx=0.5, rely=0.13, anchor=CENTER)
 btnPrint = Button(f8, text="Print", font=("Arial", 14), bg="Blue", fg="black", command=printdiag)
 btnPrint.place(x=100, y=57, anchor=CENTER)
 
 
 
-
-Data2 = {'Time': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-         'Temp': [9.8, 12, 8, 7.2, 6.9, 7, 6.5, 6.2, 5.5, 6.3]
-         }
-
-df2 = DataFrame(Data2, columns=['Time', 'Temp'])
-df2 = df2[['Time', 'Temp']].groupby('Time').sum()
-fig = plt.Figure(figsize=(5, 4), dpi=80)
-ax1 = fig.add_subplot(1,1,1)
-line2 = FigureCanvasTkAgg(fig, f8)
-line2.get_tk_widget().place(x=60, y=80)
-ax1.set_title('CPU Tempurature')
-
-
-btnCPUTemp = Button(f8, text="CPU Temp", font=("Arial", 12), bg="Green", fg="black", command=snmpget)
+btnCPUTemp = Button(f8, text="CPU Grpph", font=("Arial", 12), bg="Green", fg="black", command=animate)
 btnCPUTemp.place(x=550, y=280, anchor=CENTER)
 
-btnCPUTemp = Button(f8, text="Show Gragh", font=("Arial", 12), bg="Green", fg="black", command=snmpget)
+btnCPUTemp = Button(f8, text="Numbers", font=("Arial", 12), bg="Green", fg="black", command=save_to_graph)
 btnCPUTemp.place(x=550, y=330, anchor=CENTER)
 
-
-
-btnClear = Button(f8, text="Clear", font=("Arial Bold", 12), bg="Red", fg="black", command=clearbtn)
-btnClear.place(x=725, y=280, anchor=CENTER)
+btnClear = Button(f8, text="Read Last Lines", font=("Arial Bold", 12), bg="Red", fg="black", command=read_last_lines)
+btnClear.place(x=7, y=180, anchor=CENTER)
 
 raise_frame(f6)
 window.mainloop()
+
+
